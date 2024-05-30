@@ -1,0 +1,117 @@
+
+
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #282b30; /* Imposta il colore di sfondo a nero (sfondo scuro) #282b30;*/
+  color: #fff; /* Imposta il colore del testo a bianco */
+  
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.dashboard-title {
+  font-family: 'korataki';
+  color: #88c1ea;
+  font-size: 15px;
+  margin-top: 15px;
+  
+}
+
+.navbar-nav {
+  justify-content: flex-end;
+}
+
+.modal-header {
+  background-color: #88c1ea;
+}
+
+.modal-body {
+  background-color: #88c1ea;
+}
+
+/*Progress bar managing - SMALL */
+.progressSmall {
+  width: 80px; /* Larghezza del cerchio */
+  height: 80px; /* Altezza del cerchio */
+  background-color: #88c1ea; /* Colore di sfondo del cerchio */
+  border-radius: 50%; /* Imposta il bordo per formare un cerchio */
+  font-family: roboto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.progressSmall {
+  /* code commented for brevity */
+  background: conic-gradient( red 50%, transparent 50%, );
+}
+
+
+.progressSmall {
+  /* code commented for brevity */
+  background: conic-gradient( var(--color, 'red') calc(var(--percentage, 1) * 1%), transparent calc(var(--percentage, 1)* 1%) );
+}
+
+  .progressSmall .number {
+      background: #282b30;
+      width: 85%;
+      height: 85%;
+      color: #88c1ea;
+      border-radius: inherit;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  }
+
+
+/*Progress bar managing - NORMAL */
+.progress {
+  width: 100px; /* Larghezza del cerchio */
+  height: 100px; /* Altezza del cerchio */
+  background-color: #88c1ea; /* Colore di sfondo del cerchio */
+  border-radius: 50%; /* Imposta il bordo per formare un cerchio */
+  font-family: roboto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.progress {
+/* code commented for brevity */
+background: conic-gradient(
+    red 50%,
+    transparent 50%,
+);
+}
+
+
+.progress {
+/* code commented for brevity */
+background: conic-gradient(
+    var(--color, 'red') calc(var(--percentage, 1) * 1%), 
+    transparent calc(var(--percentage, 1)* 1%)
+);
+}
+
+.progress .number {
+background: #282b30;
+width: 85%;
+height: 85%;
+color: #88c1ea;
+border-radius: inherit;
+margin: auto;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
