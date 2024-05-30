@@ -3,7 +3,8 @@
 import axios from 'axios';
 
 // Definisci l'URL del tuo server
-const serverUrl = 'http://192.168.11.150:3000';
+//const serverUrl = 'http://192.168.11.150:3000'; //Per panel PC
+const serverUrl = 'http://localhost:3000'; //Locale
 
 export const fetchData = async () => {
     try {
