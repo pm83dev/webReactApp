@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/CourseraTest.github.io/static/css/main.0ca08534.css",
+    "main.js": "/CourseraTest.github.io/static/js/main.c7805703.js",
+    "static/js/453.1611b188.chunk.js": "/CourseraTest.github.io/static/js/453.1611b188.chunk.js",
+    "static/media/consump_icon.png": "/CourseraTest.github.io/static/media/consump_icon.17c3dd3f6a04815acf29.png",
+    "static/media/extruder_icon.png": "/CourseraTest.github.io/static/media/extruder_icon.01123595acbc96c0913b.png",
+    "static/media/rollfeed_icon.png": "/CourseraTest.github.io/static/media/rollfeed_icon.b8c0e85bc1e0cae3074e.png",
+    "static/media/App_Icon_Main_12.png": "/CourseraTest.github.io/static/media/App_Icon_Main_12.4253684e07c4cef8fcde.png",
+    "index.html": "/CourseraTest.github.io/index.html",
+    "main.0ca08534.css.map": "/CourseraTest.github.io/static/css/main.0ca08534.css.map",
+    "main.c7805703.js.map": "/CourseraTest.github.io/static/js/main.c7805703.js.map",
+    "453.1611b188.chunk.js.map": "/CourseraTest.github.io/static/js/453.1611b188.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0ca08534.css",
+    "static/js/main.c7805703.js"
+  ]
+}
