@@ -61,38 +61,9 @@ export const getMotorDataCard = (variables, imagePaths, enableRollfeed, enableAu
         return motorData;
         
     } catch (error) {
-        alert('error getMotorDataCard',error)
+        alert('error getMotorDataCard')
     }
    
-};
-
-
-export const getMotorDataModal = (variables, motorType) => {
-    switch (motorType) {
-        case MotorTypes.EXT:
-            return [
-                { nodeId: 'ext_sp_rpm', label: 'Speed Setpoint', value: extractNodeIdAndValue(findVariableByNodeId(variables ,'ext_sp_rpm')).value},
-                { nodeId: 'machine_current.amps_ext_AL1_sp', label: 'Amps Lowload Setpoint', value: extractNodeIdAndValue(findVariableByNodeId(variables, 'machine_current.amps_ext_AL1_sp')).value },
-                { nodeId: 'machine_current.amps_ext_AL2_sp', label: 'Amps Highload Setpoint', value: extractNodeIdAndValue(findVariableByNodeId(variables, 'machine_current.amps_ext_AL2_sp')).value },
-                { nodeId: 'machine_current.bar_screen_al1_sp', label: 'Pressure Warning Setpoint', value: extractNodeIdAndValue(findVariableByNodeId(variables, 'machine_current.bar_screen_al1_sp')).value },
-                { nodeId: 'machine_current.bar_screen_al2_sp', label: 'Pressure Alarm Setpoint', value: extractNodeIdAndValue(findVariableByNodeId(variables, 'machine_current.bar_screen_al2_sp')).value },
-            ];
-            case MotorTypes.DICER:
-            return [
-                { nodeId: 'dicer_sp', label: 'Speed Setpoint', value: extractNodeIdAndValue(findVariableByNodeId(variables , 'dicer_sp')).value },
-                { nodeId: 'machine_current.dicer_scale_bar_hi', label: 'Scaling - Setpoint Pressure High', value: extractNodeIdAndValue(findVariableByNodeId(variables , 'machine_current.dicer_scale_bar_hi')).value },
-                { nodeId: 'machine_current.dicer_scale_bar_lo', label: 'Scaling - Setpoint Pressure Low', value: extractNodeIdAndValue(findVariableByNodeId(variables , 'machine_current.dicer_scale_bar_lo')).value },
-                { nodeId: 'machine_current.dicer_scale_hz_hi', label: 'Scaling - Setpoint Speed High', value: extractNodeIdAndValue(findVariableByNodeId(variables , 'machine_current.dicer_scale_hz_hi')).value },
-                { nodeId: 'machine_current.dicer_scale_hz_low', label: 'Scaling - Setpoint Speed Low', value: extractNodeIdAndValue(findVariableByNodeId(variables , 'machine_current.dicer_scale_hz_low')).value },
-            ];
-            case MotorTypes.ROLLFEED:
-            return [
-                { nodeId: 'machine_current.rollfeed_sp', label: 'Speed Setpoint', value: extractNodeIdAndValue(findVariableByNodeId(variables , 'machine_current.rollfeed_sp')).value },
-            ];
-        default:
-            return [];
-
-    }
 };
 
 

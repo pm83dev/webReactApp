@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {getMotorDataCard,getMotorDataModal} from '../function/motorUtils'
+import {getMotorDataCard} from '../function/motorUtils'
 import UniversalModal from './universalModal';
 
 const CardListMotor = ({ variables, imagePathExt, imagePathDicer, imagePathRollfeed, imagePathAuger, imagePathShredder, enableRollfeed, enableAuger, enableShredder }) => {
@@ -56,7 +56,7 @@ return (
                 idxData={selectedMotorType}
                 variables={variables}
                 onHide={() => setShowModal(false)}
-                getCardData={getMotorDataModal}
+                
                 />
             )}
     </div>

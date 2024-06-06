@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { handleWrite } from '../function/apiFunctions';
 import { extractNodeIdAndValue } from '../function/variableUtils'; 
-import { getThermoDataCard, getThermoDataModal } from '../function/thermoUtils';
+import { getThermoDataCard, } from '../function/thermoUtils';
 import UniversalModal from './universalModal';
 
 export const handleIncrement = async (variables, zoneIndex, setRefreshKey) => {
@@ -89,7 +89,6 @@ const CardListThermo = ({ variables, zoneNr, imagePath }) => {
                     idxData={selectedZoneNr}
                     variables={variables}
                     onHide={() => setShowModal(false)}
-                    getCardData={getThermoDataModal}
                 />
             )}
         </div>

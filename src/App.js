@@ -1,9 +1,9 @@
 //App.js
 import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { fetchData, handleWrite, fetchVariables } from './function/apiFunctions';
+//import { fetchData, handleWrite, fetchVariables } from './function/apiFunctions';
+import { useMQTT} from './function/mqttFunctions';   
 import VariableList from './function/VariableList';
-import WriteVariableForm from './components/WriteVariableForm';
 import Navbar from './components/Navbar';
 import HomePage from './page/homePage';
 import Thermo from './images/temp60x.png';
@@ -29,33 +29,37 @@ function App() {
     const shredder_on = true;
     const dieEnable = false;
 
+    const { mqttVariables, subdone } = useMQTT();
+    // Popola lo stato `variables` con i dati MQTT all'avvio del componente
     useEffect(() => {
         const fetchDataInterval = async () => {
-            try {
-                const data = await fetchData();
-                setVariables(data);
-                setLoading(false);
-            } catch (error) {
-                setError(error.message);
-                setLoading(false);
-            }
-        };
-
-        const intervalId = setInterval(fetchDataInterval, 1000);
-
-        return () => clearInterval(intervalId);
-    }, []);
-
-    const handleWriteClick = async () => {
         try {
-            await handleWrite(nodeId, value);
-            const updatedVariables = await fetchVariables();
-            setVariables(updatedVariables);
-            alert('Valore scritto con successo');
+            if (mqttVariables && Object.keys(mqttVariables).length > 0) {
+            setVariables(mqttVariables); // Imposta le variabili MQTT nello stato
+            //console.log('mqttvariables', mqttVariables);
+            console.log('variables', mqttVariables);
+            } else {
+            console.log('mqttVariables is undefined or empty');
+            }
         } catch (error) {
-            alert(error.message);
+            setError(error.message);
         }
-    };
+        };
+    
+        const intervalId = setInterval(fetchDataInterval, 1000); // Richiama la funzione ogni 5 secondi
+    
+        return () => clearInterval(intervalId); // Pulisce l'intervallo quando il componente viene smontato
+    }, [mqttVariables,variables]); // Assicurati di includere mqttVariables come dipendenza per il useEffect
+  
+    // Aggiunto un altro useEffect per controllare subdone
+    useEffect(() => {
+        if (subdone) {
+            setLoading(false); // Imposta loading a false quando subdone è true
+        }
+    }, [subdone]);
+
+    //console.log(mqttVariables);
+    //console.log(variables);
 
     if (loading) {
         return (
@@ -97,7 +101,7 @@ function App() {
                             <div>
                                 <h1 className="dashboard-title">PLASMAC Dashboard</h1>
                                 <HomePage
-                                    variables={variables}
+                                    variables={mqttVariables}
                                     zoneNr={zoneNr}
                                     imagePath={Thermo} // Percorso dell'immagine
                                     imagePathExt={Extruder}
@@ -115,19 +119,9 @@ function App() {
                                 />
                             </div>
                         )}
-                        {activeTab === 'read' && <VariableList variables={variables} />}
-                        {activeTab === 'write' && (
-                            <WriteVariableForm
-                                nodeId={nodeId}
-                                value={value}
-                                setNodeId={setNodeId}
-                                setValue={setValue}
-                                handleWriteClick={handleWriteClick}
-                            />
-                        )}
-                        {activeTab === 'config' && <h1 className="dashboard-title">TAB 4</h1>}
-                        {activeTab === 'web' && <h1 className="dashboard-title">TAB 5</h1>}
-                        {activeTab === 'cloud' && <h1 className="dashboard-title">TAB 6</h1>}
+                        {activeTab === 'read' && <VariableList variables={mqttVariables} />}
+                        
+                        
                     </div>
                 </div>
             </div>

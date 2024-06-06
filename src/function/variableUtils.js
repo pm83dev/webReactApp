@@ -3,11 +3,12 @@
 export const extractNodeIdAndValue = (variable) => {
     let nodeId, value;
     try {
+        console.log(variable);
         if (typeof variable === 'string') {
             const parts = variable.split(', ').map(part => part.trim());
             nodeId = parts.find(part => part.startsWith('Node ID:'));
             value = parts.find(part => part.startsWith('Value:'));
-    
+            //console.log(nodeId,value);
             nodeId = nodeId ? nodeId.replace('Node ID: ', '') : '';
             value = value ? value.replace('Value: ', '') : '';
         } else if (typeof variable === 'object' ) {
@@ -20,7 +21,8 @@ export const extractNodeIdAndValue = (variable) => {
             value: value,
         };
     } catch (error) {
-        alert('errore extractNodeIdAndValue:',error)
+        //alert('errore extractNodeIdAndValue:')
+        console.log(nodeId,value);
     }
     
 };

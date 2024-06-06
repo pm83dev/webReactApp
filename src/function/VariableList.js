@@ -24,7 +24,7 @@ const VariableList = ({ variables }) => {
             </div>
         );
     }
-    
+    console.log(variables);
     return (
         <div className="container-fluid mt-5">
             <h1>Elenco delle variabili</h1>

@@ -61,7 +61,7 @@ const CardListData = ({ variables, imagePathPress, imagePathConsumption,die_On }
     // Funzione per creare una singola carta motore
     const createDataCard = (pvValue, imagePath, key) => (
         <div key={key} className="card mb-3 custom-card" 
-        style={{ backgroundColor: '#212121', padding: '10px', display: 'flex',maxHeight:'160px', minWidth: '100px', maxWidth: '100px', margin: '0 auto',marginTop: '20px', alignItems: 'center' }}>
+        style={{ backgroundColor: '#212121', padding: '10px', display: 'flex',maxHeight:'160px', minWidth: '100px', maxWidth: '100px',marginRight:'5px' ,marginLeft:'5px', margin: '0 auto',marginTop: '20px', alignItems: 'center' }}>
                     <img src={imagePath} style={{ width: '35px', height: '35px', display: 'block', marginBottom: '10px' }} alt="Motor" />
                     <div className="progressSmall" style={{ '--percentage': `${pvValue}`, '--color': '#6ace3f', marginTop: '5px', textAlign:'center'}}>
                         <div className="number" style={{ color: '#6ace3f', fontSize: '15px', fontWeight: 'bold' }}>{pvValue}</div>{/* */}
