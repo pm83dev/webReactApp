@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from "react";
-import mqtt from "mqtt";
+import { useState, useEffect } from 'react';
+import mqtt from 'mqtt';
 
 export const useMQTT = () => {
   const [mqttVariables, setmqttVariables] = useState([]);
@@ -8,21 +8,18 @@ export const useMQTT = () => {
   const clientId = 'PlasmacMqtt';
   const username = 'PlasmacMqtt';
   const password = 'Plasmac2017';
-  const clientRef = useRef(null); // Usiamo un ref per memorizzare il client MQTT
 
-  const connectMQTT = () => {
+  useEffect(() => {
     const client = mqtt.connect(brokerUrl, {
       clientId: clientId,
       username: username,
       password: password,
       tls: true,
-      keepalive: 60,//60
-      reconnectPeriod:0,//2000
-      connectTimeout: 60 * 1000,//60 * 1000
-      clean: true
+      keepalive: 60,
+      reconnectPeriod: 2000,
+      connectTimeout: 60 * 1000,
+      clean: false
     });
-
-    clientRef.current = client; // Memorizziamo il client MQTT nel ref
 
     client.on('connect', () => {
       console.log('Connected to MQTT broker');
@@ -38,13 +35,11 @@ export const useMQTT = () => {
 
     client.on('message', (topic, message) => {
       const messageStr = message.toString();
-      //console.log(messageStr);
       const startIndex = messageStr.indexOf('Value:');
       const nodeID = messageStr.substring(9, startIndex - 2); // Estrae il Node ID
       const valueStr = messageStr.substring(startIndex).trim(); // Estrae e trimma il valore
       const formattedMessage = `Node ID: ${nodeID}, ${valueStr}`; // Formatta il messaggio
-      //console.log(`Received message on topic ${topic}: ${message.toString()}`)
-
+      console.log(`Received message on topic ${topic}: ${message.toString()}`);
       setmqttVariables(prevVariables => {
         // Verifica se l'elemento con lo stesso Node ID è già presente nell'array
         const existingIndex = prevVariables.findIndex(variable => variable.startsWith(`Node ID: ${nodeID}`));
@@ -57,7 +52,7 @@ export const useMQTT = () => {
           // Altrimenti, aggiungi il nuovo messaggio all'array
           return [...prevVariables, formattedMessage];
         }
-       });
+      });
     });
    
     client.on('error', (err) => {
@@ -76,19 +71,24 @@ export const useMQTT = () => {
     client.on('offline', () => {
       console.log('Client is offline');
     });
-  };
 
-  useEffect(() => {
-    connectMQTT(); // Avvia la connessione MQTT all'avvio del componente
+    // Evento di debug per monitorare i dettagli di disconnessione
+    client.on('disconnect', (packet) => {
+      console.log(`MQTT Client Disconnect: ${packet ? packet.message : 'Unknown reason'}`);
+    });
 
-    // Avvia l'intervallo per riconnettere MQTT ogni X secondi
-    const reconnectInterval = setInterval(() => {
-      connectMQTT();
-    }, 5000); // Riconnette ogni 5 secondi
+    client.on('disconnect', (packet) => {
+      console.log(`MQTT Client Disconnect: ${packet ? packet.reasonCode + ' - ' + packet.properties.reasonString : 'Unknown reason'}`);
+    });
 
-    // Pulisce l'intervallo quando il componente viene smontato
-    return () => clearInterval(reconnectInterval);
-  }, []);
+    return () => {
+      if (client.connected) {
+        client.end();
+      }
+    };
+  }, [brokerUrl, clientId, username, password]);
 
-  return { mqttVariables, subdone, client: clientRef.current };
+  //console.log('useMQTT result:', { mqttVariables, subdone });
+
+  return {mqttVariables,subdone};
 };

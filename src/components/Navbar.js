@@ -26,7 +26,7 @@ const Navbar = ({ activeTab, setActiveTab }) => {
                 <a className="navbar-brand" href="https://syncro-group.com/plasmac/">
                     <img src={PlasmacLogoMini} alt="Logo" style={{ width: '30px', height: '30px', backgroundColor: 'transparent' }} />
                     <span className="navbar-text" style={{ color: '#88c1ea', fontFamily: 'Korataki, sans-serif', fontSize: '18px', marginLeft: '10px' }}>
-                        PLASMAC WebSupervisor
+                        PLASMAC WebSupervisorLite
                     </span>
                 </a>
 
@@ -48,11 +48,11 @@ const Navbar = ({ activeTab, setActiveTab }) => {
                         </li>
                         <li className="nav-item">
                             <button
-                                className={`nav-link btn ${activeTab === 'read' ? 'active' : ''}`}
+                                className={`nav-link btn ${activeTab === 'chart' ? 'active' : ''}`}
                                 style={{ backgroundColor: 'transparent', color: '#fff' }}
-                                onClick={() => handleTabChange('read')}
+                                onClick={() => handleTabChange('chart')}
                             >
-                                <img src={AppIconMain9} alt="Read" style={{ width: '30px', height: '30px', marginRight: '10px' }} />
+                                <img src={AppIconMain9} alt="chart" style={{ width: '30px', height: '30px', marginRight: '10px' }} />
                             </button>
                         </li>
                         <li className="nav-item">

@@ -6,71 +6,65 @@ import { extractNodeIdAndValue, findVariableByNodeId } from '../function/variabl
 const CardListData = ({ variables, imagePathPress, imagePathConsumption,die_On }) => {
     
     
-    //#region Data Variables
-    
-    const barDie = findVariableByNodeId(variables, 'bar_die');
-    const barScreen = findVariableByNodeId(variables, 'bar_screen');
-    const kwTotal = findVariableByNodeId(variables, 'Total_kWh');
-    const kwHeating = findVariableByNodeId(variables, 'Total_kW_Heating');
-    const kwInverter = findVariableByNodeId(variables, 'Total_Kw_ist_inverter');
-    
-
-    const barScreenParsed = extractNodeIdAndValue(barScreen || '');
-    const barDieParsed = extractNodeIdAndValue(barDie || '');
-    const kwTotalParsed = extractNodeIdAndValue(kwTotal || '');
-    const kwHeatingParsed = extractNodeIdAndValue(kwHeating || '');
-    const kwInverterParsed = extractNodeIdAndValue(kwInverter || '');
-
-    const barScreenValue = typeof barScreenParsed.value === 'string' ? parseFloat(barScreenParsed.value).toFixed(0) : 'N/A';
-    const barDieValue = typeof barDieParsed.value === 'string' ? parseFloat(barDieParsed.value).toFixed(0) : 'N/A';
-    const kwTotalValue = typeof kwTotalParsed.value === 'string' ? parseFloat(kwTotalParsed.value).toFixed(0) : 'N/A';
-    const kwheatingValue = typeof kwHeatingParsed.value === 'string' ? parseFloat(kwHeatingParsed.value).toFixed(0) : 'N/A';
-    const kwInverterValue = typeof kwInverterParsed.value === 'string' ? parseFloat(kwInverterParsed.value).toFixed(0) : 'N/A';
-    
     //#endregion
 
     // Array di oggetti che rappresentano i dati dei motori
     const varData = [
         {
-            pv: barScreenValue,
+            pv: extractNodeIdAndValue(findVariableByNodeId(variables, 'bar_screen')).value,
             imagePath: imagePathPress,
+            um: 'bar',
+            desc:'Screen'
         },
         {
-            pv: kwTotalValue,
+            pv: extractNodeIdAndValue(findVariableByNodeId(variables, 'Total_kWh')).value,
             imagePath: imagePathConsumption,
+            um: 'kWh',
+            desc:'Total'
         },
         {
-            pv: kwheatingValue,
+            pv: extractNodeIdAndValue(findVariableByNodeId(variables, 'Total_kW_Heating')).value,
             imagePath: imagePathConsumption,
+            um: 'kW',
+            desc:'Heating'
+
         },
         {
-            pv: kwInverterValue,
+            pv: extractNodeIdAndValue(findVariableByNodeId(variables, 'Total_Kw_ist_inverter')).value,
             imagePath: imagePathConsumption,
+            um: 'kW',
+            desc:'Inverter'
         }
 
     ];
 
     if (die_On) {
         varData.push({
-            pv: barDieValue,
+            pv: extractNodeIdAndValue(findVariableByNodeId(variables, 'bar_die')).value,
             imagePath: imagePathPress,
+            um: 'bar',
+            desc:'Die'
         });
     }
 
 
     // Funzione per creare una singola carta motore
-    const createDataCard = (pvValue, imagePath, key) => (
+    const createDataCard = (pvValue, imagePath, key, um, desc) => (
         <div key={key} className="card mb-3 custom-card" 
-        style={{ backgroundColor: '#212121', padding: '10px', display: 'flex',maxHeight:'160px', minWidth: '100px', maxWidth: '100px',marginRight:'5px' ,marginLeft:'5px', margin: '0 auto',marginTop: '20px', alignItems: 'center' }}>
-                    <img src={imagePath} style={{ width: '35px', height: '35px', display: 'block', marginBottom: '10px' }} alt="Motor" />
-                    <div className="progressSmall" style={{ '--percentage': `${pvValue}`, '--color': '#6ace3f', marginTop: '5px', textAlign:'center'}}>
+        style={{ backgroundColor: '#212121', padding: '10px', display: 'flex',maxHeight:'220px', minWidth: '100px', maxWidth: '100px',marginRight:'5px' ,marginLeft:'5px', margin: '0 auto',marginTop: '20px', alignItems: 'center' }}>
+                    <img src={imagePath} style={{ width: '35px', height: '35px', display: 'block', marginBottom: 'auto' }} alt="Motor" />
+                    <div className="progressSmall" style={{ '--percentage': `${pvValue}`, '--color': '#6ace3f', marginTop: '10px', textAlign:'center'}}>
                         <div className="number" style={{ color: '#6ace3f', fontSize: '15px', fontWeight: 'bold' }}>{pvValue}</div>{/* */}
                     </div>
+                    <section><div className="number" style={{ color: '#6ace3f', fontSize: '16px', fontWeight:'bold', marginTop:'5px', textAlign:'center'}}>{um}</div>
+                    <p style={{ color: '#6ace3f', fontSize: '14px', marginTop:'10px', marginBottom:'auto', textAlign:'center'}}>{desc}</p>
+                    </section>
+                    
         </div>
     );
 
     // Crea le carte per tutti i motori nell'array varData
-    const dataCards = varData.map((device, index) => createDataCard(device.pv,device.imagePath, index));
+    const dataCards = varData.map((device, index) => createDataCard(device.pv,device.imagePath, index, device.um, device.desc));
 
     // Restituisci tutte le carte dei motori
     return (

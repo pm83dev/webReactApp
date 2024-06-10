@@ -7,7 +7,7 @@ const CardListMotor = ({ variables, imagePathExt, imagePathDicer, imagePathRollf
     
     
     const [showModal, setShowModal] = useState(false);
-    const [selectedMotorType, setSelectedMotorType] = useState(null);
+    //const [selectedMotorType, setSelectedMotorType] = useState(null);
     const imagePaths = {
         ext: imagePathExt,
         dicer: imagePathDicer,
@@ -18,17 +18,18 @@ const CardListMotor = ({ variables, imagePathExt, imagePathDicer, imagePathRollf
 
     const motorCardsData = getMotorDataCard(variables, imagePaths, enableRollfeed, enableAuger, enableShredder);
 
+    /*
     const handleCardClick = (motorType) => {
         setSelectedMotorType(motorType);
         setShowModal(true);
     };
+    */
     
     const createMotorCard = (motor, key) => (
         <div
             key={key}
             className="card mb-3 custom-card"
             style={{ backgroundColor: '#212121', padding: '10px', display: 'flex', maxHeight: '160px', minWidth: '280px', maxWidth: '290px', margin: '0 auto', marginTop: '20px', alignItems: 'center', cursor: 'pointer' }}
-            onClick={() => handleCardClick(motor.idxMotor)}
         >
             <div style={{ display: 'flex', alignItems: 'center' }}>
                 <div style={{ textAlign: 'left', width: '100px' }}>
@@ -53,7 +54,7 @@ return (
         {motorCards}
         {showModal && (
                 <UniversalModal
-                idxData={selectedMotorType}
+                //idxData={selectedMotorType}
                 variables={variables}
                 onHide={() => setShowModal(false)}
                 

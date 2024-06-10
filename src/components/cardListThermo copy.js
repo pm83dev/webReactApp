@@ -66,7 +66,7 @@ const CardListThermo = ({ variables, zoneNr, imagePath }) => {
             </div>
             <div className="card-body text-dark d-flex flex-column align-items-center">
                 <h5 className="card-title" style={{ color: '#88c1ea', fontSize: '16px', fontWeight: 'bold' }}>{zoneName}</h5>
-                <p className="card-text" style={{ color: '#88c1ea', fontSize: '16px', fontWeight: 'bold', marginBottom: '5px', cursor: 'pointer' }} onClick={() => handleSpClick(zoneIndex, zoneName, zoneSp)}>
+                <p className="card-text" style={{ color: '#88c1ea', fontSize: '16px', fontWeight: 'bold', marginBottom: '5px', cursor: 'pointer' }}>
                     SP: {zoneSp} °C
                 </p>
                 <p className="card-text" style={{ color: '#88c1ea', fontSize: '16px', fontWeight: 'bold', marginTop: '5px' }}>PV: {zoneReal} °C</p>

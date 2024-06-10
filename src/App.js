@@ -2,8 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 //import { fetchData, handleWrite, fetchVariables } from './function/apiFunctions';
-import { useMQTT} from './function/mqttFunctions';   
-import VariableList from './function/VariableList';
+import { useMQTT} from './function/mqttFunctions';     
 import Navbar from './components/Navbar';
 import HomePage from './page/homePage';
 import Thermo from './images/temp60x.png';
@@ -15,48 +14,33 @@ import Shredder from './images/shredder_icon.png';
 import PressIcon from './images/Press_icon_green.png';
 import ConsIcon from './images/consump_icon.png';
 
+//Prove grafici
+import BarChart from './components/ExampleBarChart';
+import LineChart from './components/ExampleLineChart';
+import TestChart from './components/TestChart';
+
 
 function App() {
-    const [variables, setVariables] = useState([]);
-    const [nodeId, setNodeId] = useState('');
-    const [value, setValue] = useState('');
+    
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState('');
+    const [variables, setVariables] = useState([]);
+    const error = ''; 
     const [activeTab, setActiveTab] = useState('home');
     const zoneNr = 8; // Numero delle zone
     const rollfeed_on = true;
     const auger_on = true;
     const shredder_on = true;
     const dieEnable = false;
-
+    
     const { mqttVariables, subdone } = useMQTT();
-    // Popola lo stato `variables` con i dati MQTT all'avvio del componente
-    useEffect(() => {
-        const fetchDataInterval = async () => {
-        try {
-            if (mqttVariables && Object.keys(mqttVariables).length > 0) {
-            setVariables(mqttVariables); // Imposta le variabili MQTT nello stato
-            //console.log('mqttvariables', mqttVariables);
-            console.log('variables', mqttVariables);
-            } else {
-            console.log('mqttVariables is undefined or empty');
-            }
-        } catch (error) {
-            setError(error.message);
-        }
-        };
-    
-        const intervalId = setInterval(fetchDataInterval, 1000); // Richiama la funzione ogni 5 secondi
-    
-        return () => clearInterval(intervalId); // Pulisce l'intervallo quando il componente viene smontato
-    }, [mqttVariables,variables]); // Assicurati di includere mqttVariables come dipendenza per il useEffect
-  
+
     // Aggiunto un altro useEffect per controllare subdone
     useEffect(() => {
         if (subdone) {
+            setVariables(mqttVariables);
             setLoading(false); // Imposta loading a false quando subdone è true
         }
-    }, [subdone]);
+    }, [subdone,mqttVariables]);
 
     //console.log(mqttVariables);
     //console.log(variables);
@@ -101,7 +85,7 @@ function App() {
                             <div>
                                 <h1 className="dashboard-title">PLASMAC Dashboard</h1>
                                 <HomePage
-                                    variables={mqttVariables}
+                                    variables={variables}
                                     zoneNr={zoneNr}
                                     imagePath={Thermo} // Percorso dell'immagine
                                     imagePathExt={Extruder}
@@ -119,7 +103,7 @@ function App() {
                                 />
                             </div>
                         )}
-                        {activeTab === 'read' && <VariableList variables={mqttVariables} />}
+                        {activeTab === 'chart' && <TestChart variables={variables}/>}
                         
                         
                     </div>
