@@ -64,7 +64,7 @@ const TestChart = ({ variables }) => {
         console.error(error);
       }
     };
-    const intervalId = setInterval(insNewValLogging, 1000);
+    const intervalId = setInterval(insNewValLogging, 5000);
     return () => clearInterval(intervalId);
   }, [variables]);
 
