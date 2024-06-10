@@ -47,11 +47,11 @@ const TestChart = ({ variables }) => {
               datasets: [
                 {
                   ...prevData.datasets[0],
-                  data: [...prevData.datasets[0].data, newVal1].slice(-300) // Limita a 10 valori
+                  data: [...prevData.datasets[0].data, newVal1].slice(-60) // Limita a 60 valori
                 },
                 {
                   ...prevData.datasets[1],
-                  data: [...prevData.datasets[1].data, newVal2].slice(-300) // Limita a 10 valori
+                  data: [...prevData.datasets[1].data, newVal2].slice(-60) // Limita a 60 valori
                 }
               ]
             };
