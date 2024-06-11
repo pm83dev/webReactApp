@@ -12,12 +12,14 @@ const initialData = {
       data: [],
       fill: false,
       borderColor: "#88c1ea",
+      tension: 0.4 // Arrotonda le linee
     },
     {
       label: "Second dataset",
       data: [],
       fill: false,
       borderColor: "#6ace3f",
+      tension: 0.4 // Arrotonda le linee
     }
   ]
 };
@@ -52,7 +54,7 @@ const optionsBar = {
   maintainAspectRatio: false
 };
 
-const TestChart = ({ variables }) => {
+const ChartDashboard = ({ variables }) => {
   const [lineData, setLineData] = useState(() => {
     const savedData = localStorage.getItem('lineChartData');
     return savedData ? JSON.parse(savedData) : initialData;
@@ -138,7 +140,7 @@ const TestChart = ({ variables }) => {
       }
     };
 
-    const intervalId = setInterval(insNewValLogging, 3000);
+    const intervalId = setInterval(insNewValLogging, 5000);
     return () => clearInterval(intervalId);
   }, [variables]);
 
@@ -158,7 +160,7 @@ const TestChart = ({ variables }) => {
         <Line data={lineData} options={optionsLine} />
       </div>
       <section>
-        <button type="button" className="btn btn-primary" style={{ marginLeft: '20px', marginTop: '10px' }} onClick={resetCache}>Reset Data Cache</button>
+        <button type="button" className="btn btn-info" style={{ marginLeft: '20px', marginTop: '10px' }} onClick={resetCache}>Reset Data Cache</button>
       </section>
       <section>
         <div className="chart-container" style={{ position: "relative", width: "100%", height: "400px" }}>
@@ -169,4 +171,4 @@ const TestChart = ({ variables }) => {
   );
 };
 
-export default TestChart;
+export default ChartDashboard;

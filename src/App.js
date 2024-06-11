@@ -15,9 +15,7 @@ import PressIcon from './images/Press_icon_green.png';
 import ConsIcon from './images/consump_icon.png';
 
 //Prove grafici
-import BarChart from './components/ExampleBarChart';
-import LineChart from './components/ExampleLineChart';
-import TestChart from './components/TestChart';
+import ChartDashboard from './components/ChartDashboard';
 
 
 function App() {
@@ -103,7 +101,7 @@ function App() {
                                 />
                             </div>
                         )}
-                        {activeTab === 'chart' && <TestChart variables={variables}/>}
+                        {activeTab === 'chart' && <ChartDashboard variables={variables}/>}
                         
                         
                     </div>

@@ -1,12 +1,12 @@
 //homePage.js
 import React, { useEffect, useState } from 'react';
-import CardListThermo, { handleIncrement, handleDecrement } from '../components/cardListThermo.js';
 import CardListMotor from '../components/cardListMotor.js';
 import CardListData from '../components/cardListData';  
-
+import CardListThermo from '../components/cardListThermo.js';
+import ChartConsBar from '../components/ChartBar.js';
 const HomePage = ({ variables, zoneNr, imagePath, imagePathExt, imagePathDicer, imagePathRollfeed, imagePathAuger, imagePathShredder,enableRollfeed, enableAuger, enableShredder, imagePathPress, imagePathConsumption, die_On }) => {
     const [loading, setLoading] = useState(true);
-    const [buttonStates, setButtonStates] = useState(Array(zoneNr).fill(true)); // Array di booleani per rappresentare lo stato dei pulsanti
+
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -15,25 +15,6 @@ const HomePage = ({ variables, zoneNr, imagePath, imagePathExt, imagePathDicer, 
         }, 100);
     }, []);
 
-    const handleIncrementWrapper = async (zoneIndex) => {
-        await handleIncrement(variables, zoneIndex);
-        // Aggiorna lo stato del pulsante corrispondente
-        setButtonStates(prevStates => {
-            const newStates = [...prevStates];
-            newStates[zoneIndex - 1] = true; // Indice - 1 perché gli indici partono da 0
-            return newStates;
-        });
-    };
-
-    const handleDecrementWrapper = async (zoneIndex) => {
-        await handleDecrement(variables, zoneIndex);
-        // Aggiorna lo stato del pulsante corrispondente
-        setButtonStates(prevStates => {
-            const newStates = [...prevStates];
-            newStates[zoneIndex - 1] = true; // Indice - 1 perché gli indici partono da 0
-            return newStates;
-        });
-    };
 
     if (loading) {
         return (
@@ -82,16 +63,14 @@ const HomePage = ({ variables, zoneNr, imagePath, imagePathExt, imagePathDicer, 
                     imagePathPress={imagePathPress}
                     imagePathConsumption={imagePathConsumption}
                     die_On={die_On}
-                />
+                />    
             </div>
+            
         </div>
         <CardListThermo
             variables={variables}
             zoneNr={zoneNr}
             imagePath={imagePath}
-            handleIncrement={handleIncrementWrapper}
-            handleDecrement={handleDecrementWrapper}
-            buttonStates={buttonStates}
         />
     </div>
     );
