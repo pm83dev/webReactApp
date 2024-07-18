@@ -5,9 +5,9 @@ export const useMQTT = () => {
   const [mqttVariables, setmqttVariables] = useState([]);
   const [subdone, setSubdone] = useState(false);
   const brokerUrl = 'wss://1aaffbeccd5041228b92873ea14d8087.s1.eu.hivemq.cloud:8884/mqtt';
-  const clientId = 'PlasmacMqtt';
-  const username = 'PlasmacMqtt';
-  const password = 'Plasmac2017';
+  const clientId = 'xxxxxxxxxxx';
+  const username = 'xxxxxxxxxxx';
+  const password = 'xxxxxxxxxxx';
   const clientRef = useRef(null); // Usiamo un ref per memorizzare il client MQTT
 
   const connectMQTT = () => {
