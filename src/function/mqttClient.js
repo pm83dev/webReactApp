@@ -18,7 +18,7 @@ export const client = mqtt.connect(brokerUrl, {
 
 client.on('connect', () => {
   console.log('Connected to MQTT broker');
-  client.subscribe('plasmac/#', (err) => {
+  client.subscribe('plasmac/P24020/#', (err) => {
     if (!err) {
       console.log('Subscribed to topic plasmac/#');
     } else {
