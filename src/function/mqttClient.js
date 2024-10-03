@@ -20,7 +20,7 @@ client.on('connect', () => {
   console.log('Connected to MQTT broker');
   client.subscribe('plasmac/P24020/#', (err) => {
     if (!err) {
-      console.log('Subscribed to topic plasmac/#');
+      console.log('Subscribed to topic plasmac/P24020/#');
     } else {
       console.error('Error subscribing to topic:', err);
     }
